@@ -3,255 +3,235 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sales Analytics Dashboard</title>
+<title>Business Analytics Dashboard | Karan Thakur</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-* {
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    margin: 0;
-    background: #f1f5f9;
-    color: #1e293b;
-}
-
-header {
-    background: #10233f;
-    color: white;
-    padding: 30px;
-}
-
-header p {
-    color: #cbd5e1;
-}
-
-.container {
-    max-width: 1100px;
-    margin: 30px auto;
-    padding: 15px;
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    margin: 25px 0;
-}
-
-.card, .panel {
-    background: white;
-    padding: 22px;
-    border-radius: 12px;
-    box-shadow: 0 3px 12px #00000008;
-}
-
-.card p {
-    color: #64748b;
-}
-
-.card h2 {
-    font-size: 23px;
-}
-
-.charts {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
-    margin-bottom: 25px;
-}
-
-.chartbox {
-    height: 300px;
-    position: relative;
-}
-
-select {
-    padding: 10px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 13px;
-    text-align: left;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-th {
-    background: #f8fafc;
-}
-
-.tablebox {
-    overflow-x: auto;
-}
-
-footer {
-    text-align: center;
-    padding: 25px;
-    color: #64748b;
-}
-
-@media(max-width:700px) {
-    .cards {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .charts {
-        grid-template-columns: 1fr;
-    }
-}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
+header{background:#14243b;color:white;padding:25px 6%}
+header h1{font-size:27px;margin-bottom:8px}
+header p{color:#cbd5e1;font-size:14px}
+.container{max-width:1200px;margin:28px auto;padding:0 20px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:22px}
+select{padding:11px;border:1px solid #ccd5e1;border-radius:8px;background:white}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.card,.panel{background:white;padding:22px;border-radius:12px;box-shadow:0 3px 15px #00000008}
+.card p{color:#64748b;font-size:13px;margin-bottom:12px}
+.card h2{font-size:25px;margin-bottom:8px}
+.change{font-size:12px;color:#16865c}
+.charts{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:22px}
+.panel h3{font-size:17px;margin-bottom:20px}
+.chartbox{height:280px;position:relative}
+.tablebox{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:550px}
+th,td{text-align:left;padding:14px;border-bottom:1px solid #e2e8f0;font-size:14px}
+th{background:#f8fafc;color:#475569}
+.badge{background:#dcfce7;color:#166534;padding:5px 9px;border-radius:20px;font-size:12px}
+footer{text-align:center;padding:25px;color:#64748b;font-size:13px}
+@media(max-width:800px){.cards{grid-template-columns:repeat(2,1fr)}.charts{grid-template-columns:1fr}}
+@media(max-width:450px){.cards{grid-template-columns:1fr}header h1{font-size:22px}.card h2{font-size:23px}}
 </style>
 </head>
 
 <body>
 
 <header>
-    <h1>Sales Analytics Dashboard</h1>
-    <p>Business Intelligence | Sales Performance Analysis</p>
+<h1>Business Analytics Dashboard</h1>
+<p>Sales Performance | Financial Overview | Business Insights</p>
 </header>
 
 <main class="container">
 
-    <h2>Business Overview</h2>
+<div class="top">
+<div>
+<h2>Overview</h2>
+<p style="color:#64748b;margin-top:7px">Business performance at a glance</p>
+</div>
+<select id="period" onchange="updateDashboard()">
+<option value="0">Full Year 2025</option>
+<option value="1">First Half 2025</option>
+<option value="2">Second Half 2025</option>
+</select>
+</div>
 
-    <select id="region" onchange="updateDashboard()">
-        <option value="All">All Regions</option>
-        <option value="North">North</option>
-        <option value="South">South</option>
-        <option value="East">East</option>
-        <option value="West">West</option>
-    </select>
+<section class="cards">
+<div class="card">
+<p>Total Revenue</p>
+<h2 id="revenue">₹24,80,000</h2>
+<span class="change">↑ 12.5% vs previous period</span>
+</div>
+<div class="card">
+<p>Total Expenses</p>
+<h2 id="expenses">₹16,20,000</h2>
+<span class="change">Operating costs</span>
+</div>
+<div class="card">
+<p>Net Profit</p>
+<h2 id="profit">₹8,60,000</h2>
+<span class="change">↑ Positive profitability</span>
+</div>
+<div class="card">
+<p>Profit Margin</p>
+<h2 id="margin">34.7%</h2>
+<span class="change">Profit / Revenue</span>
+</div>
+<div class="card">
+<p>Total Orders</p>
+<h2 id="orders">1,240</h2>
+<span class="change">Customer transactions</span>
+</div>
+<div class="card">
+<p>Average Order Value</p>
+<h2 id="average">₹2,000</h2>
+<span class="change">Revenue per order</span>
+</div>
+<div class="card">
+<p>Units Sold</p>
+<h2 id="units">3,850</h2>
+<span class="change">Across all products</span>
+</div>
+<div class="card">
+<p>Top Product</p>
+<h2 id="topproduct">Electronics</h2>
+<span class="change">By sales revenue</span>
+</div>
+</section>
 
-    <section class="cards">
-        <div class="card">
-            <p>Total Revenue</p>
-            <h2 id="revenue">₹0</h2>
-        </div>
+<section class="charts">
+<div class="panel">
+<h3>Monthly Revenue vs Expenses</h3>
+<div class="chartbox"><canvas id="salesChart"></canvas></div>
+</div>
+<div class="panel">
+<h3>Revenue by Region</h3>
+<div class="chartbox"><canvas id="regionChart"></canvas></div>
+</div>
+</section>
 
-        <div class="card">
-            <p>Total Profit</p>
-            <h2 id="profit">₹0</h2>
-        </div>
+<section class="panel" style="margin-bottom:22px">
+<h3>Product Performance</h3>
+<div class="tablebox">
+<table>
+<thead>
+<tr><th>Product</th><th>Revenue</th><th>Units Sold</th><th>Performance</th></tr>
+</thead>
+<tbody id="productTable"></tbody>
+</table>
+</div>
+</section>
 
-        <div class="card">
-            <p>Total Orders</p>
-            <h2 id="orders">0</h2>
-        </div>
-
-        <div class="card">
-            <p>Average Order Value</p>
-            <h2 id="average">₹0</h2>
-        </div>
-    </section>
-
-    <section class="charts">
-        <div class="panel">
-            <h3>Monthly Revenue</h3>
-            <div class="chartbox">
-                <canvas id="salesChart"></canvas>
-            </div>
-        </div>
-
-        <div class="panel">
-            <h3>Revenue by Region</h3>
-            <div class="chartbox">
-                <canvas id="regionChart"></canvas>
-            </div>
-        </div>
-    </section>
-
-    <section class="panel">
-        <h3>Product Performance</h3>
-        <div class="tablebox">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Region</th>
-                        <th>Revenue</th>
-                        <th>Profit</th>
-                    </tr>
-                </thead>
-                <tbody id="salesTable"></tbody>
-            </table>
-        </div>
-    </section>
+<section class="panel">
+<h3>Key Business Insights</h3>
+<p style="margin:12px 0;line-height:1.7">• Revenue and expenses help evaluate overall business performance.</p>
+<p style="margin:12px 0;line-height:1.7">• Profit margin shows how much revenue remains as profit.</p>
+<p style="margin:12px 0;line-height:1.7">• Regional sales help identify strong markets and growth opportunities.</p>
+<p style="margin:12px 0;line-height:1.7">• Product performance supports better inventory and sales decisions.</p>
+</section>
 
 </main>
 
 <footer>
-    Sales Analytics Dashboard | Built with HTML, CSS and JavaScript
+Business Analytics Project | Created by Karan Thakur<br>
+Tools: HTML, CSS, JavaScript and Chart.js<br>
+Note: This dashboard uses fictional sample data for demonstration.
 </footer>
 
 <script>
-const data = [
-    {month:"Jan",product:"Laptop",region:"North",revenue:85000,profit:15000},
-    {month:"Jan",product:"Phone",region:"South",revenue:45000,profit:9000},
-    {month:"Feb",product:"Tablet",region:"East",revenue:30000,profit:6000},
-    {month:"Feb",product:"Laptop",region:"West",revenue:95000,profit:18000},
-    {month:"Mar",product:"Phone",region:"North",revenue:55000,profit:11000},
-    {month:"Mar",product:"Headphones",region:"South",revenue:20000,profit:5000},
-    {month:"Apr",product:"Laptop",region:"East",revenue:105000,profit:21000},
-    {month:"Apr",product:"Tablet",region:"West",revenue:35000,profit:7000},
-    {month:"May",product:"Phone",region:"North",revenue:65000,profit:13000},
-    {month:"May",product:"Headphones",region:"East",revenue:25000,profit:6000},
-    {month:"Jun",product:"Laptop",region:"South",revenue:115000,profit:23000},
-    {month:"Jun",product:"Tablet",region:"North",revenue:40000,profit:9000},
-    {month:"Jul",product:"Phone",region:"West",revenue:60000,profit:12000},
-    {month:"Jul",product:"Laptop",region:"East",revenue:100000,profit:20000},
-    {month:"Aug",product:"Headphones",region:"South",revenue:28000,profit:7000},
-    {month:"Aug",product:"Tablet",region:"North",revenue:42000,profit:9000},
-    {month:"Sep",product:"Laptop",region:"West",revenue:120000,profit:25000},
-    {month:"Sep",product:"Phone",region:"East",revenue:70000,profit:15000},
-    {month:"Oct",product:"Tablet",region:"South",revenue:38000,profit:8000},
-    {month:"Oct",product:"Headphones",region:"North",revenue:32000,profit:8000},
-    {month:"Nov",product:"Laptop",region:"North",revenue:130000,profit:27000},
-    {month:"Nov",product:"Phone",region:"West",revenue:75000,profit:16000},
-    {month:"Dec",product:"Laptop",region:"South",revenue:140000,profit:30000},
-    {month:"Dec",product:"Tablet",region:"East",revenue:50000,profit:11000}
-];
+const data = {
+0:{
+revenue:2480000,expenses:1620000,orders:1240,units:3850,
+months:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+sales:[150,165,180,170,195,205,215,220,230,245,240,265],
+costs:[95,100,110,105,120,130,135,140,145,150,155,165],
+regions:[35,28,22,15],
+products:[
+["Electronics",850000,920],
+["Fashion",620000,1150],
+["Home & Living",540000,780],
+["Accessories",470000,1000]
+]},
+1:{
+revenue:1065000,expenses:700000,orders:560,units:1700,
+months:["Jan","Feb","Mar","Apr","May","Jun"],
+sales:[150,165,180,170,195,205],
+costs:[95,100,110,105,120,130],
+regions:[34,29,22,15],
+products:[
+["Electronics",370000,400],
+["Fashion",270000,500],
+["Home & Living",230000,350],
+["Accessories",195000,450]
+]},
+2:{
+revenue:1415000,expenses:920000,orders:680,units:2150,
+months:["Jul","Aug","Sep","Oct","Nov","Dec"],
+sales:[215,220,230,245,240,265],
+costs:[135,140,145,150,155,165],
+regions:[36,27,22,15],
+products:[
+["Electronics",480000,520],
+["Fashion",350000,650],
+["Home & Living",310000,430],
+["Accessories",275000,550]
+]}
+};
 
-let salesChart, regionChart;
+let salesChart,regionChart;
 
-function money(value) {
-    return "₹" + Math.round(value).toLocaleString("en-IN");
+function money(n){
+return "₹"+Math.round(n).toLocaleString("en-IN");
 }
 
-function updateDashboard() {
-    const selected = document.getElementById("region").value;
+function updateDashboard(){
+const d=data[document.getElementById("period").value];
+const profit=d.revenue-d.expenses;
+document.getElementById("revenue").textContent=money(d.revenue);
+document.getElementById("expenses").textContent=money(d.expenses);
+document.getElementById("profit").textContent=money(profit);
+document.getElementById("margin").textContent=(profit/d.revenue*100).toFixed(1)+"%";
+document.getElementById("orders").textContent=d.orders.toLocaleString("en-IN");
+document.getElementById("average").textContent=money(d.revenue/d.orders);
+document.getElementById("units").textContent=d.units.toLocaleString("en-IN");
+document.getElementById("topproduct").textContent=d.products.slice().sort((a,b)=>b[1]-a[1])[0][0];
 
-    const rows = selected === "All"
-        ? data
-        : data.filter(item => item.region === selected);
+document.getElementById("productTable").innerHTML=d.products.map(p=>
+`<tr><td>${p[0]}</td><td>${money(p[1])}</td><td>${p[2].toLocaleString("en-IN")}</td><td><span class="badge">Recorded</span></td></tr>`
+).join("");
 
-    const revenue = rows.reduce((sum,item) => sum + item.revenue,0);
-    const profit = rows.reduce((sum,item) => sum + item.profit,0);
+if(salesChart)salesChart.destroy();
+if(regionChart)regionChart.destroy();
 
-    document.getElementById("revenue").textContent = money(revenue);
-    document.getElementById("profit").textContent = money(profit);
-    document.getElementById("orders").textContent = rows.length;
-    document.getElementById("average").textContent =
-        money(rows.length ? revenue / rows.length : 0);
+salesChart=new Chart(document.getElementById("salesChart"),{
+type:"bar",
+data:{
+labels:d.months,
+datasets:[
+{label:"Revenue (₹ thousands)",data:d.sales,backgroundColor:"#3976e8",borderRadius:5},
+{label:"Expenses (₹ thousands)",data:d.costs,backgroundColor:"#a9bce4",borderRadius:5}
+]},
+options:{
+responsive:true,maintainAspectRatio:false,
+plugins:{legend:{position:"bottom"}},
+scales:{y:{beginAtZero:true}}
+}
+});
 
-    const months = ["Jan","Feb","Mar","Apr","May","Jun",
-                    "Jul","Aug","Sep","Oct","Nov","Dec"];
+regionChart=new Chart(document.getElementById("regionChart"),{
+type:"doughnut",
+data:{
+labels:["North","South","East","West"],
+datasets:[{data:d.regions,backgroundColor:["#3976e8","#20a67a","#f2ad4e","#a78bfa"],borderWidth:0}]
+},
+options:{
+responsive:true,maintainAspectRatio:false,
+plugins:{legend:{position:"bottom"}}
+}
+});
+}
 
-    const monthly = months.map(month =>
-        rows.filter(item => item.month === month)
-            .reduce((sum,item) => sum + item.revenue,0)
-    );
+updateDashboard();
+</script>
 
-    if (salesChart) salesChart.destroy();
-
-    salesChart = new Chart(document.getElementById("salesChart"), {
-        type: "line",
-        data: {
-            labels
+</body>
+</html>
